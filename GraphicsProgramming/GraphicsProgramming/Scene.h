@@ -16,6 +16,8 @@
 #include "SOIL.h"
 #include <vector>
 #include "Shape.h"
+#include "MyCamera.h"
+#include "ProceduralShape.h"
 
 
 class Scene{
@@ -45,6 +47,7 @@ protected:
 
 	// For access to user input.
 	Input* input;
+	int mousePreviousPos[2];
 		
 	// For Window and frustum calculation.
 	int width, height;
@@ -58,6 +61,10 @@ protected:
 	GLuint myTexture;
 
 	Shape basic_shape;
+
+	// My camera
+	MyCamera myCamera;
+	ProceduralShape proceduralShapeGenerator;
 
 };
 

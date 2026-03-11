@@ -18,6 +18,25 @@ Scene::Scene(Input *in)
 void Scene::handleInput(float dt)
 {
 	// Handle user input
+
+	// Camera movement
+	if (input->isKeyDown('w')) myCamera.moveForward(dt * 10);
+	else if (input->isKeyDown('s'))	myCamera.moveForward(-dt * 10);
+	if (input->isKeyDown(32)) myCamera.moveUp(dt * 10);
+	else if (GetAsyncKeyState(VK_CONTROL)) myCamera.moveUp(-dt * 10);									//This is needed cuz ctrl is a modifier key, thus it doesn't normally register alone normally. Shift is VK_SHIFT
+
+	int mousePos[2] = { input->getMouseX(), input->getMouseY() };
+	// Camera rotation
+	if (input->isMouseRDown())
+	{
+		myCamera.turnUp(mousePreviousPos[1] - mousePos[1]);
+		myCamera.turnRight(mousePos[0] - mousePreviousPos[0]);
+	}
+	mousePreviousPos[0] = mousePos[0];
+	mousePreviousPos[1] = mousePos[1];
+
+
+
 }
 
 void Scene::update(float dt)
@@ -36,14 +55,14 @@ void Scene::render() {
 	// Reset transformations
 	glLoadIdentity();
 	// Set the camera
-	gluLookAt(0.0f, 0.0f, 6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+	myCamera.update();
 	
 	// Render geometry/scene here -------------------------------------
 	
-	basic_shape.render1(myTexture);
+	//basic_shape.render1(myTexture);
 	//basic_shape.render2(myTexture);
-	//basic_shape.render3(myTexture);
-
+	basic_shape.render3(myTexture);
+	proceduralShapeGenerator.GenerateDisc(10, 1);
 
 	// End render geometry --------------------------------------
 
