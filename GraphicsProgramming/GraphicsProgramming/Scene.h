@@ -55,6 +55,8 @@ protected:
 	char fps[40];
 	char mouseText[40];
 
+	GLuint myTexture;
+
 	Shape basic_shape;
 
 };

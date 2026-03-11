@@ -40,9 +40,9 @@ void Scene::render() {
 	
 	// Render geometry/scene here -------------------------------------
 	
-	basic_shape.render1();
-	//basic_shape.render2();
-	//basic_shape.render3();
+	basic_shape.render1(myTexture);
+	//basic_shape.render2(myTexture);
+	//basic_shape.render3(myTexture);
 
 
 	// End render geometry --------------------------------------
@@ -65,6 +65,15 @@ void Scene::initialiseOpenGL()
 	glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
 	glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, 1);
+	
+
+	glEnable(GL_TEXTURE_2D);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	myTexture = SOIL_load_OGL_texture(
+		"gfx/transparentcrate.png",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 }
 
 // Handles the resize of the window. If the window changes size the perspective matrix requires re-calculation to match new window size.

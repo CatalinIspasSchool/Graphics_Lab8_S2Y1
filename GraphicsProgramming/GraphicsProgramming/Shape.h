@@ -8,9 +8,9 @@
 class Shape
 {
 public:
-	void render1();
-	void render2();
-	void render3();
+	void render1(GLuint texture);
+	void render2(GLuint texture);
+	void render3(GLuint texture);
 
 };
 #endif 
